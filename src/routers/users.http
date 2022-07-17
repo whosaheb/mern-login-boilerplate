@@ -1,0 +1,46 @@
+### register user
+POST http://localhost:2000/auth/register
+Content-Type: application/json
+
+{
+    "name":"Saheb",
+    "email":"saheb@saheb.com",
+    "password":"12345"
+}
+
+### user login
+POST http://localhost:2000/auth/login
+Content-Type: application/json
+
+{
+    "email":"saheb@admin.com",
+    "password":"54321"
+}
+
+### logout user
+GET http://localhost:2000/auth/logout HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQxOGQ4ZTkyNjRkODk2ZWFiZTIxYzEiLCJpYXQiOjE2NTc5MTYzMjIsImV4cCI6MTY1ODc4MDMyMn0.ANyp803anLgsSTKPDSZSLM8G2iKMmg1kmsB_hcZ919I
+
+### get all user
+GET http://localhost:2000/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQxOGQ4ZTkyNjRkODk2ZWFiZTIxYzEiLCJpYXQiOjE2NTc5MTk1ODgsImV4cCI6MTY1ODAwNTk4OH0.4Xx3s7KceJORRc15FG5kYbcMR4UeCKUiGjsGO1VXTng
+
+###admin Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQxODYzNThhY2FkMzU2ZTUzOWFhY2YiLCJpYXQiOjE2NTc5MTc0NDIsImV4cCI6MTY1ODAwMzg0Mn0.sXgrKHDN7bowVo8eeDR_uABoWWkLCDmGpAzQil9p9XQ
+
+###normal Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQxOGQ4ZTkyNjRkODk2ZWFiZTIxYzEiLCJpYXQiOjE2NTc5MTk1ODgsImV4cCI6MTY1ODAwNTk4OH0.4Xx3s7KceJORRc15FG5kYbcMR4UeCKUiGjsGO1VXTng
+
+### get user by id
+GET http://localhost:2000/api/user/62d18d8e9264d896eabe21c1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQxOGQ4ZTkyNjRkODk2ZWFiZTIxYzEiLCJpYXQiOjE2NTc5MTk1ODgsImV4cCI6MTY1ODAwNTk4OH0.4Xx3s7KceJORRc15FG5kYbcMR4UeCKUiGjsGO1VXTng
+
+### Modify user
+PUT http://localhost:2000/api/user/62d18d8e9264d896eabe21c1
+Content-Type: application/json
+
+{
+    "password": "12345",
+    "newPassword":"54321"
+}
+
+### remove user
+DELETE http://localhost:2000/api/user/62d1c9e07874fba902772e8b

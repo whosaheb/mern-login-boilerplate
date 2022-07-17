@@ -1,0 +1,31 @@
+### create item
+POST http://localhost:2000/api/role
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQxOGQ4ZTkyNjRkODk2ZWFiZTIxYzEiLCJpYXQiOjE2NTc5MTY4NTAsImV4cCI6MTY1ODAwMzI1MH0.1RWhrOMtd-Wgo0jTX7urlnucxzodYCAHpJXWMmIEaV4
+
+{
+    "name":"super admin"
+}
+
+### get list
+GET http://localhost:2000/api/roles
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQxODYzNThhY2FkMzU2ZTUzOWFhY2YiLCJpYXQiOjE2NTc5MTc0NDIsImV4cCI6MTY1ODAwMzg0Mn0.sXgrKHDN7bowVo8eeDR_uABoWWkLCDmGpAzQil9p9XQ
+
+
+### get role by id
+GET http://localhost:2000/api/role/62d1ce0c18e1497d5595a305
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQxOGQ4ZTkyNjRkODk2ZWFiZTIxYzEiLCJpYXQiOjE2NTc5MTY4NTAsImV4cCI6MTY1ODAwMzI1MH0.1RWhrOMtd-Wgo0jTX7urlnucxzodYCAHpJXWMmIEaV4
+
+### modify role by id
+PUT http://localhost:2000/api/role/62d1ce0c18e1497d5595a305
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQxODYzNThhY2FkMzU2ZTUzOWFhY2YiLCJpYXQiOjE2NTc5MTc0NDIsImV4cCI6MTY1ODAwMzg0Mn0.sXgrKHDN7bowVo8eeDR_uABoWWkLCDmGpAzQil9p9XQ
+
+{
+    "name":"admin super"
+}
+
+### delete role by id
+DELETE http://localhost:2000/api/role/62d1ce0c18e1497d5595a305
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQxODYzNThhY2FkMzU2ZTUzOWFhY2YiLCJpYXQiOjE2NTc5MTc0NDIsImV4cCI6MTY1ODAwMzg0Mn0.sXgrKHDN7bowVo8eeDR_uABoWWkLCDmGpAzQil9p9XQ

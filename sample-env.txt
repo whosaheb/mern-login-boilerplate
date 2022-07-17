@@ -1,0 +1,4 @@
+HOST = 127.0.0.1
+PORT = 2000
+DB = mongodb://localhost:27017/mern-login-boilerPlate
+JWT_SECRET = thisIsSpecialSecret
