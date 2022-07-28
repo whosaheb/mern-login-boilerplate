@@ -5,15 +5,14 @@ const router = express.Router();
 const authRoutes = require('./auth');
 const roleRoutes = require('./role');
 const userRoutes = require('./users');
+const exceptionRoutes = require('./exception');
 
 router.use('/auth', authRoutes);
 router.use('/api', roleRoutes);
 router.use('/api', userRoutes);
 
 
-router.get('/', (req, res)=>{
-    res.send("bla!!!!")
-});
-
+//alway use it below */
+router.use('', exceptionRoutes); // Handle exception and static files routing like(404,initpage,...)
 
 module.exports = router

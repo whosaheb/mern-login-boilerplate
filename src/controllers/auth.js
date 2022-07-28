@@ -1,15 +1,32 @@
 const User = require('../models/Users');
 const jwt = require('jsonwebtoken');
+const Role = require('../models/Role');
 
 
 const register = async (req, res) => {
     try {
-        // let user = await User.create(req.body);
-        console.log(req.body);
-        // if (!user) {
-        //     return res.status(204).json({ status: 'error', message: 'no content' });
-        // }
-        res.json({ status: 'success', message: 'Successfully registered' });
+        // console.log(req.body);
+        let emailPresent = await User.findOne({ email: req.body.email }, { email: 1 });
+        //if email not present in the db then allow to register user
+        if (!emailPresent) {
+            //if user role is not present in body then assign default 'user' role when register 
+            if (req.body && !req.body.role) {
+                let role = await Role.findOne({ name: 'user' });
+                //if 'user' role not created then created it
+                if (!role) {
+                    role = await Role.create({ name: 'user' })
+                }
+                // assign the 'user' role id to the body object
+                req.body.role = role._id;
+            }
+            // create the user and send a success message to the client
+            await User.create(req.body); 
+            // if we want to verify the email, then we should create user status which should be false by default , if email verified then set it to true
+            res.json({ status: 'success', message: 'Successfully registered' });
+        } else {
+            //if email exist then send back the message 'Email already exist'
+            res.status(400).json({ status: 'error', message: 'Email already exist' });
+        }
     } catch (err) {
         res.status(504).json({ status: 'error', message: err });
     }
@@ -18,16 +35,16 @@ const register = async (req, res) => {
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        let user = await User.findOne({ email });
+        let user = await User.findOne({ email }).populate([{ path: 'role', select: { name: 1 } }]);
         // if user is found make sure the email and password match
         if (!user) {
             return res.status(400).json({ status: 'error', message: "User with that email does not exist. Please register" });
         } else if (!user.authenticate(password)) {    // create authenticate method in user model
             return res.status(401).json({ status: 'error', message: "Email and password does not match" });
         }
-        // console.log(user._id);
+        // console.log(user.role.name);
         // generate a signed token with user id and secret
-        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+        const token = jwt.sign({ _id: user._id, role: user.role.name }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
         // if anyone want user can login from one device at a time then uncomment below line of code
         // await User.findByIdAndUpdate({ _id: user._id }, { $set: { token: token } });
@@ -57,11 +74,8 @@ const requireLogin = async (req, res, next) => {
         }
         // console.log(token);
         let decode = jwt.verify(token, process.env.JWT_SECRET);
-        let validateUser = await User.findById({ _id: decode._id }).populate([{path:'role', select: {name:1}}]);
-        // console.log(validateUser);
-        if (validateUser) {
+        if(decode){
             req.auth = decode;
-            req.auth.role = validateUser.role ? validateUser.role : null;
             return next();
         }
         throw "You are not authorised to access the resource."
@@ -73,7 +87,7 @@ const requireLogin = async (req, res, next) => {
 
 const isAuth = async (req, res, next) => {
     try {
-        let user = req.profile && req.auth && req.profile._id == req.auth._id;
+        let user = req.profile && req.auth && (req.profile._id == req.auth._id || req.auth.role == 'admin');
         if (!user) {
             return res.status(403).json({ status: 'error', message: "Access denied" });
         }

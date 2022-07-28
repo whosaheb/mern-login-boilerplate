@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
     "name":"Saheb",
-    "email":"saheb@saheb.com",
+    "email":"saheb@admin.com",
     "password":"12345"
 }
 
@@ -13,8 +13,8 @@ POST http://localhost:2000/auth/login
 Content-Type: application/json
 
 {
-    "email":"saheb@admin.com",
-    "password":"54321"
+    "email":"admin@admin.com",
+    "password":"12345"
 }
 
 ### logout user
@@ -23,18 +23,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQxOGQ4Z
 
 ### get all user
 GET http://localhost:2000/api/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQxOGQ4ZTkyNjRkODk2ZWFiZTIxYzEiLCJpYXQiOjE2NTc5MTk1ODgsImV4cCI6MTY1ODAwNTk4OH0.4Xx3s7KceJORRc15FG5kYbcMR4UeCKUiGjsGO1VXTng
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmUyYTQ5NDU3YjYzMjg5MjIxZTkxMmYiLCJyb2xlIjoidXNlciIsImlhdCI6MTY1OTAyNDA4NSwiZXhwIjoxNjU5MTEwNDg1fQ.ZaubOTD4sG9MbSqtn_fZRMsD9-dv_K7WO0usPwZ1V6c
 
 ###admin Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQxODYzNThhY2FkMzU2ZTUzOWFhY2YiLCJpYXQiOjE2NTc5MTc0NDIsImV4cCI6MTY1ODAwMzg0Mn0.sXgrKHDN7bowVo8eeDR_uABoWWkLCDmGpAzQil9p9XQ
 
 ###normal Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQxOGQ4ZTkyNjRkODk2ZWFiZTIxYzEiLCJpYXQiOjE2NTc5MTk1ODgsImV4cCI6MTY1ODAwNTk4OH0.4Xx3s7KceJORRc15FG5kYbcMR4UeCKUiGjsGO1VXTng
 
 ### get user by id
-GET http://localhost:2000/api/user/62d18d8e9264d896eabe21c1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQxOGQ4ZTkyNjRkODk2ZWFiZTIxYzEiLCJpYXQiOjE2NTc5MTk1ODgsImV4cCI6MTY1ODAwNTk4OH0.4Xx3s7KceJORRc15FG5kYbcMR4UeCKUiGjsGO1VXTng
+GET http://localhost:2000/api/user/62e2a49457b63289221e912f
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQxODYzNThhY2FkMzU2ZTUzOWFhY2YiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NTkwMjQ3MDAsImV4cCI6MTY1OTExMTEwMH0.mHNfvo0-TYyUVGTxn69118sLzZf279guEAnJ8_C5Kx8
 
 ### Modify user
-PUT http://localhost:2000/api/user/62d18d8e9264d896eabe21c1
+PUT http://localhost:2000/api/user/62e2a49457b63289221e912f
 Content-Type: application/json
 
 {

@@ -3,7 +3,7 @@ const { errorHandler } = require("../helper/dbErrorHandler");
 
 const userById = async (req, res, next, id) => {
     try {
-        let user = await User.findById(id).exec();
+        let user = await User.findById(id).populate([{ path: 'role', select: { name: 1 } }]).exec();
         if (!user) {
             return res.status(400).json({ status: 'error', message: 'User not found' });
         }
@@ -40,7 +40,7 @@ const update = async (req, res) => {
         if (Object.keys(req.body).length == 0) {
             throw "reqest body can not be null";
         }
-        let user = req.profile; //define the user object
+        let user = req.profile; //initialize the user object
 
         //modify user object if there is any new data
         if (req.body.name) user.name = req.body.name;
@@ -66,6 +66,17 @@ const update = async (req, res) => {
     }
 };
 
+const resetPassword = async (req, res) => {
+    let user = req.profile; //initialize the user object
+    //modify user object if there is any new data
+    user.password = 12345;
+
+    user = await user.save() //save the updated user into db
+    user.hashed_password = undefined; // undefined unnessesory value for client
+    user.salt = undefined;
+    res.json({ status: 'success', message: 'Password successfully reset, default password is 12345', user });
+}
+
 const remove = async (req, res) => {
     try {
         let user = await User.findByIdAndRemove({ _id: req.profile._id });
@@ -81,5 +92,6 @@ module.exports = {
     read,
     update,
     userList,
+    resetPassword,
     remove
 }
